@@ -1,0 +1,13 @@
+{% include 'menu.html' %}
+<hr>
+<html>
+    <body>
+        <form
+            method="post" action="/myformprocess">
+            {%csrf_token %}
+            No1 : <input type="text" placeholder="Enter No1" name="txt1" required />
+            No2 : <input type="text" placeholder="Enter No2" name="txt2" required/>
+            <input type="submit"/>
+        </form>
+    </body>
+</html>
