@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('sname', models.CharField(max_length=50, verbose_name='Name')),
                 ('smobile', models.CharField(max_length=10, verbose_name='Mobile')),
                 ('semail', models.CharField(max_length=50, verbose_name='Email')),
-                ('spassword', models.CharField(max_length=50, verbose_name='Password')),
+                ('saddress', models.CharField(max_length=50, verbose_name='Address')),
 
             ],
         ),
