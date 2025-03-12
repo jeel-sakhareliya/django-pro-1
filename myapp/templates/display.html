@@ -1,0 +1,24 @@
+<table>
+    <tr>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+    </tr>
+    {% for pdata in mydata %}
+    <tr>
+        <td>{{ pdata.id }}</td>
+        <td>{{ pdata.sname }}</td>
+        <td>
+            <a href="edit-student/{{pdata.id}}">Edit</a>
+            <a onclick="return confirm('Are You Sure?')"
+    </tr>
+    {% endfor%}
+</table>
+    
+            
+            
+            
+            
+
+   

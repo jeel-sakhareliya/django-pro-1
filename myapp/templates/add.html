@@ -1,0 +1,17 @@
+{% include 'header.html' %}
+{% include 'menu.html' %}
+{% if messages %}
+
+<div style="background-color: cadetblue;">
+    {% for message in messages %}
+       {{ message }}
+       {% endfor %}
+</div>
+{% endif %}
+
+<h2> ADD INFORMATION </h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save" />
+</form>
