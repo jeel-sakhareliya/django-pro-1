@@ -1,5 +1,8 @@
 from django.db import models
 
+from django.db import models
+from .questions_model import Question
+
 # Create your models here.
 class Student(models.Model):
     sname = models.CharField("Name" ,max_length=50,blank=False)

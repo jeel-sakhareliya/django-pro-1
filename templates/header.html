@@ -1,3 +1,45 @@
-<center> <h1>JEEL SAKHARELIYA</h1>  </center>
-<hr>
-<hr>
+{% load static %}
+<div class="header-container">
+    <div class="header-left">
+        <img src="{% static 'jil.jpeg' %}" alt="Profile Picture" class="header-profile-pic">
+        <div class="typing-text-container">
+            <p>I'm a <span id="typing-text"></span></p>
+        </div>
+    </div>
+    <div class="header-right">
+        <a href="https://www.instagram.com/jeel_sakhareliya?igsh=bmkwbDA4ZG4zeTRm" target="_blank">
+            <i class="fab fa-instagram social-icon"></i>
+        </a>
+        <a href="https://www.facebook.com/share/17QwgdY1vS/" target="_blank">
+            <i class="fab fa-facebook social-icon"></i>
+        </a>
+    </div>
+</div>
+
+<script>
+    const textElement = document.getElementById('typing-text');
+    const texts = ['Software Engineer', 'Beginner Developer'];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+        const currentText = texts[textIndex];
+        const currentChars = currentText.substring(0, charIndex);
+        textElement.textContent = currentChars;
+
+        if (!isDeleting && charIndex < currentText.length) {
+            charIndex++;
+            setTimeout(type, 100);
+        } else if (isDeleting && charIndex > 0) {
+            charIndex--;
+            setTimeout(type, 50);
+        } else {
+            isDeleting = !isDeleting;
+            textIndex = !isDeleting ? (textIndex + 1) % texts.length : textIndex;
+            setTimeout(type, 1000);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', type);
+</script>

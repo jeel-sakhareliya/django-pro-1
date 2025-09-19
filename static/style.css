@@ -1,4 +1,411 @@
-body{
-    background-color:wheat
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    background-image: linear-gradient(135deg, #f0f2f5 25%, #e6e9ed 75%);
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s ease;
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #2c3e50;
+    color: #fff;
 }
 
+.header-profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 2px solid #fff;
+    transition: transform 0.3s ease-in-out;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+}
+.header-profile-pic:hover {
+    transform: scale(1.1);
+}
+
+.typing-text-container {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.typing-text-container p {
+    margin: 0;
+    color: #fff;
+}
+
+#typing-text {
+    color: #3498db;
+    border-right: 2px solid #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icon {
+    font-size: 25px;
+    color: #fff;
+    margin-left: 15px;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+    color: #3498db;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: white; }
+}
+.navigation-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #34495e;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 90%;
+}
+
+.navigation-bar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    padding: 12px 25px;
+    margin: 0 10px;
+    border-radius: 50px;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+.navigation-bar a:hover {
+    background-color: #3498db;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.main-content {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #fff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding-top: 20px;
+}
+
+.profile-text {
+    flex: 1;
+}
+
+.profile-pic {
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+    transform: scale(1.05);
+}
+
+.form-title {
+    color: #3498db;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.submit-button {
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+.student-form-wrapper {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+}
+
+.form-heading {
+    font-size: 2.2em;
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.student-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.form-field-group {
+    display: flex;
+    flex-direction: column;
+    animation: slideInLeft 0.7s ease-in-out forwards;
+}
+
+.form-field-group:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.form-field-group:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.form-field-group:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.form-submit-button {
+    grid-column: 1 / -1;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    text-transform: uppercase;
+}
+
+.form-submit-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+}
+
+.about-me-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 30px;
+    flex-wrap: wrap;
+    animation: fadeIn 1.5s ease-in-out forwards;
+}
+
+.about-me-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: left;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.8s ease-out forwards;
+}
+
+.personal-info-card {
+    border-left: 5px solid #007bff;
+    animation-delay: 0.2s;
+}
+
+.skills-card {
+    border-left: 5px solid #28a745;
+    animation-delay: 0.4s;
+}
+
+.card-title {
+    color: #333;
+    font-size: 1.8em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.skill-item {
+    margin-bottom: 15px;
+}
+
+.skill-name {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.skill-bar {
+    background-color: #e9ecef;
+    border-radius: 50px;
+    height: 12px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background-color: #007bff;
+    width: 0;
+    transition: width 1.5s ease-in-out;
+}
+
+.about-me-card:hover .skill-progress {
+    animation-name: fillSkill;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.html {
+    background-color: #e44d26;
+    width: 90%;
+}
+
+.css {
+    background-color: #264de4;
+    width: 85%;
+}
+
+.c-plus {
+    background-color: #5580a6;
+    width: 75%;
+}
+
+.django {
+    background-color: #0c4b33;
+    width: 95%;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fillSkill {
+    from {
+        width: 0;
+    }
+    to {
+        width: 90%;
+    }
+}
+
+.social-icons {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.social-logo {
+    font-size: 40px;
+    color: #333;
+    margin: 0 15px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-logo:hover {
+    transform: scale(1.2);
+    color: #007bff;
+}
+
+.navigation-bar a.active {
+    background-color: #3498db;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}

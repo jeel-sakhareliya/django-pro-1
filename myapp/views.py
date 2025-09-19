@@ -67,8 +67,32 @@ def editStudent(request,id):
 
 
 
+from django.shortcuts import render, redirect
+from .questions_model import Question 
 
-     
+def add_question(request):
+    if request.method == 'POST':
+        suggestion_text = request.POST.get('suggestion')
+        if suggestion_text:
+            Question.objects.create(suggestion=suggestion_text)
+            return redirect('success_page')
+    return render(request, 'addQuestion.html')
+
+def success_page(request):
+    return render(request, 'success.html')
+
+
+# myapp/views.py
+
+def add_student(request):
+    # ... your view code ...
+    pass
+
+# myapp/views.py
+
+from django.shortcuts import render
+
+
 
 
         

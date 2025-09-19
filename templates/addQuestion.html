@@ -1,0 +1,31 @@
+{% include 'header.html' %}
+  
+{% load static %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Suggestion</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    {% include "menu.html" %}
+
+    <div class="main-content">
+        <h2 class="form-title">Add a Suggestion</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="suggestion">Your Suggestion:</label>
+                <textarea id="suggestion" name="suggestion" rows="10" cols="50" maxlength="250" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Save</button>
+        </form>
+    </div>
+</body>
+</html>

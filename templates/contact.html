@@ -1,23 +1,38 @@
-{% load static%}
 {% include 'header.html' %}
-{% include 'menu.html' %}
+{% include "menu.html" %}   
+{% load static %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{%static 'style.css'%}"
-    </head>
-    <body>
-        <h1>
-            <img width="200" src="{% static 'D:\Django\mydjproject\static\Picsart_24-12-11_11-45-25-987.png'%}" align="right"/>
-            Jeel Sakhareliya
-        </h1> 
-            <p>INSTAGRAM - @jeel_sakhareliya</p>
-            <p>WHATSAPP - 884940*5**</p>
-            <p>FACEBOOK - JEEL SAKHARELIYA </p>
-           <p>YOUTUBE - SJALOFI</p> 
-        
-       
-        </body>
-       
-       
+<head>
+    <title>Contact Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
 
+
+    <div class="main-content">
+        <div class="profile-container">
+            <div class="profile-text">
+                <h2>MY SELF JEEL SAKHARELIYA</h2>
+                <p>You Can Contact me at anytime </p>
+                <p>throught the link given below</p>
+            </div>
+            <img class="profile-pic" src="{% static 'new-profile-pic.jpg' %}" alt="Profile Picture">
+        </div>
+
+        <div class="social-icons">
+            <a href="https://www.instagram.com/jeel_sakhareliya?igsh=bmkwbDA4ZG4zeTRm" target="_blank">
+                <i class="fab fa-instagram social-logo"></i>
+            </a>
+            <a href="https://www.facebook.com/share/17QwgdY1vS/" target="_blank">
+                <i class="fab fa-facebook social-logo"></i>
+            </a>
+        </div>
+</body>
 </html>

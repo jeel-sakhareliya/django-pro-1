@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success!</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="main-content">
+        <h1>Success!</h1>
+        <p>Your suggestion has been submitted successfully.</p>
+        <p><a href="{% url 'add-question' %}">Submit another suggestion</a></p>
+        <p><a href="{% url 'home' %}">Go back to the homepage</a></p>
+    </div>
+</body>
+</html>

@@ -1,13 +1,54 @@
-{% load static%}
-{% include 'header.html' %}
-{% include 'menu.html' %}
+<!DOCTYPE html>
 <html>
-    <body>
-        <h1>
-           ITS ME JEEL SAKHARELIYA  </h1>
-           <p>FROM INDUS UNIVERSITY</p>
-           <p>B.TECH. COMPUTER ENGINNERING PURSUING</p><br>
-           
-       
-    </body>
+<head>
+    {% include 'header.html' %}
+    <title>About Me</title>
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% include "menu.html" %}
+</head>
+<body>
+
+    <div class="about-me-container">
+        <div class="about-me-card personal-info-card">
+            <h2 class="card-title">MY SELF JEEL SAKHARELIYA</h2>
+            <p>FROM ; Indus University</p>
+            <p>B.TECH, COMPUTER ENGINEERING PURSUING</p>
+        </div>
+
+        <div class="about-me-card skills-card">
+            <h2 class="card-title">MY SKILLS</h2>
+            <div class="skill-item">
+                <span class="skill-name">HTML</span>
+                <div class="skill-bar">
+                    <div class="skill-progress html"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <span class="skill-name">CSS</span>
+                <div class="skill-bar">
+                    <div class="skill-progress css"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <span class="skill-name">C and C++</span>
+                <div class="skill-bar">
+                    <div class="skill-progress c-plus"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <span class="skill-name">Django</span>
+                <div class="skill-bar">
+                    <div class="skill-progress django"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
