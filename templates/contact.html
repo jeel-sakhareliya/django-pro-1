@@ -1,38 +1,22 @@
-{% include 'header.html' %}
-{% include "menu.html" %}   
+{% extends 'base.html' %}
 {% load static %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Contact Page</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
 
+{% block title %}Contact Me{% endblock %}
 
-    <div class="main-content">
-        <div class="profile-container">
-            <div class="profile-text">
-                <h2>MY SELF JEEL SAKHARELIYA</h2>
-                <p>You Can Contact me at anytime </p>
-                <p>throught the link given below</p>
-            </div>
-            <img class="profile-pic" src="{% static 'new-profile-pic.jpg' %}" alt="Profile Picture">
-        </div>
+{% block content %}
+<div class="contact-page glass-card">
+    <img class="profile-pic" src="{% static 'new-profile-pic.jpg' %}" alt="Profile Picture">
+    
+    <h2>Get In Touch</h2>
+    <p>You can contact me anytime through the links below. I'm always open to connecting with new people.</p>
 
-        <div class="social-icons">
-            <a href="https://www.instagram.com/jeel_sakhareliya?igsh=bmkwbDA4ZG4zeTRm" target="_blank">
-                <i class="fab fa-instagram social-logo"></i>
-            </a>
-            <a href="https://www.facebook.com/share/17QwgdY1vS/" target="_blank">
-                <i class="fab fa-facebook social-logo"></i>
-            </a>
-        </div>
-</body>
-</html>
+    <div class="social-links">
+        <a href="https://www.instagram.com/jeel_sakhareliya?igsh=bmkwbDA4ZG4zeTRm" target="_blank" class="social-icon">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/share/17QwgdY1vS/" target="_blank" class="social-icon">
+            <i class="fab fa-facebook"></i>
+        </a>
+    </div>
+</div>
+{% endblock %}

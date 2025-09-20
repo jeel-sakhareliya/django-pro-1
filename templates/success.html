@@ -1,16 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Success!</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-    <div class="main-content">
-        <h1>Success!</h1>
-        <p>Your suggestion has been submitted successfully.</p>
-        <p><a href="{% url 'add-question' %}">Submit another suggestion</a></p>
-        <p><a href="{% url 'home' %}">Go back to the homepage</a></p>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Success!{% endblock %}
+
+{% block content %}
+<div class="form-wrapper glass-card" style="text-align: center;">
+    <div style="font-size: 4rem; color: var(--success-color); margin-bottom: 1rem;">
+        <i class="fas fa-check-circle"></i>
     </div>
-</body>
-</html>
+    <h2>Success!</h2>
+    <div class="success-content">
+        <p>Your suggestion has been submitted successfully.</p>
+        <a href="{% url 'home' %}#suggestions" class="btn" style="margin-top: 1rem;">Submit Another</a>
+        <a href="{% url 'home' %}" class="btn" style="margin-top: 1rem; background-image: none; background-color: rgba(255,255,255,0.1);">Go Home</a>
+    </div>
+</div>
+{% endblock %}

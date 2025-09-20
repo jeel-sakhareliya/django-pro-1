@@ -13,34 +13,11 @@
         <a href="https://www.facebook.com/share/17QwgdY1vS/" target="_blank">
             <i class="fab fa-facebook social-icon"></i>
         </a>
+        {% if not user.is_authenticated %}
+        <div class="header-mobile-auth">
+            <a href="{% url 'login' %}" class="btn btn-small">Login</a>
+            <a href="{% url 'signup' %}" class="btn btn-small btn-secondary">Sign Up</a>
+        </div>
+        {% endif %}
     </div>
 </div>
-
-<script>
-    const textElement = document.getElementById('typing-text');
-    if (textElement) {
-        const texts = ['Software Engineer', 'Beginner Developer'];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            const currentText = texts[textIndex];
-            const currentChars = currentText.substring(0, charIndex);
-            textElement.textContent = currentChars;
-
-            if (!isDeleting && charIndex < currentText.length) {
-                charIndex++;
-                setTimeout(type, 100);
-            } else if (isDeleting && charIndex > 0) {
-                charIndex--;
-                setTimeout(type, 50);
-            } else {
-                isDeleting = !isDeleting;
-                textIndex = !isDeleting ? (textIndex + 1) % texts.length : textIndex;
-                setTimeout(type, 1000);
-            }
-        }
-        document.addEventListener('DOMContentLoaded', type);
-    }
-</script>

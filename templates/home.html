@@ -1,20 +1,80 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {% include "header.html" %}
-    {% load static %}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-    {% include "menu.html" %}
+{% extends 'base.html' %}
+{% load static %}
 
-    <div class="main-content">
-        <h1>HELLO THERE! Happy To See You HERE!! </h1>
-    </div>
-</body>
-</html>
+{% block body_class %}homepage{% endblock %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<div class="homepage">
+    <!-- Hero Section -->
+    <section id="home-hero" class="hero-section">
+        <div class="hero-content">
+            <h1 class="reveal">Nice to see you!</h1>
+            <p class="reveal" style="animation-delay: 0.2s;">You can explore anything here. Sign up to upload your important documents and store them safely.</p>
+            <a href="#about" class="btn reveal" style="animation-delay: 0.4s;">Learn More <i class="fas fa-arrow-down"></i></a>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="homepage-section fade-in-section">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-details">
+            <div class="about-card glass-card">
+                <div class="about-card-icon"><i class="fas fa-user-graduate"></i></div>
+                <h3>Who I Am</h3>
+                <p>My name is <strong>Jeel Sakhareliya</strong>. I am currently pursuing a B.Tech in Computer Engineering at Indus University. I am driven by a passion for building elegant and functional software solutions.</p>
+            </div>
+            <div class="about-card glass-card">
+                <div class="about-card-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>My Skills</h3>
+                <div class="skill-item">
+                    <span class="skill-name">HTML</span>
+                    <div class="skill-bar"><div class="skill-progress" data-width="90%" style="background-color: #e44d26;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">CSS</span>
+                    <div class="skill-bar"><div class="skill-progress" data-width="85%" style="background-color: #264de4;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">C and C++</span>
+                    <div class="skill-bar"><div class="skill-progress" data-width="75%" style="background-color: #5580a6;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Django</span>
+                    <div class="skill-bar"><div class="skill-progress" data-width="95%" style="background-color: #0c4b33;"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suggestions Section -->
+    <section id="suggestions" class="homepage-section fade-in-section">
+        <h2 class="section-title">Leave a Suggestion</h2>
+        <div class="form-wrapper glass-card">
+            <form method="post" action="{% url 'add-question' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="suggestion_text">Your Suggestion</label>
+                    <textarea id="suggestion_text" name="suggestion_text" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Submit Suggestion</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="homepage-section fade-in-section">
+        <h2 class="section-title">Contact Info</h2>
+        <div class="contact-page glass-card">
+            <img class="profile-pic" src="{% static 'new-profile-pic.jpg' %}" alt="Profile Picture">
+            <h3>Get In Touch</h3>
+            <p>You can find me on the following platforms. I'm always open to connecting!</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/jeel_sakhareliya?igsh=bmkwbDA4ZG4zeTRm" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/share/17QwgdY1vS/" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

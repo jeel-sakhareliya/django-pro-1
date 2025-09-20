@@ -1,27 +1,36 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
-<body>
 
-    {% include 'header.html' %}
-    {% include 'menu.html' %}
+{% block title %}Sign Up{% endblock %}
 
-    <div class="auth-container">
-      <div class="auth-form-wrapper">
-        <h2 class="form-title">Create Your Account</h2>
-        <form method="post">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit" class="submit-btn">Sign Up</button>
-        </form>
-      </div>
-    </div>
+{% block content %}
+<div id="signup-confetti"></div>
+<div class="form-wrapper glass-card interactive-form-wrapper">
 
-</body>
-</html>
+    {% if messages %}
+        {% for message in messages %}
+            {% if "Successfully Signed Up" in message.tags %}
+                <div class="message success signup-success">{{ message }}</div>
+            {% else %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <h2>Create Your Account</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field }}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {% if field.help_text %}<small class="helptext">{{ field.help_text|safe }}</small>{% endif %}
+                {% for error in field.errors %}<p class="message error" style="text-align: left; padding: 0.5rem; margin-top: 0.5rem;">{{ error }}</p>{% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Sign Up</button>
+    </form>
+    
+    <p class="auth-switch">Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+</div>
+{% endblock %}

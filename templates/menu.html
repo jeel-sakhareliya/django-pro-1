@@ -1,22 +1,25 @@
-<div class="navigation-bar">
-    <div class="nav-links-left">
-        <a href="{% url 'home' %}" class="{% if request.path == '/' or request.path == '/home/' %}active{% endif %}">Home</a>
-        <a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}">About Me</a>
-        <a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Contact Me</a>
-        <a href="{% url 'add-student' %}" class="{% if request.path == '/add-student/' %}active{% endif %}">Give Me Your Info</a>
-        <a href="{% url 'add-question' %}" class="{% if request.path == '/add-question/' %}active{% endif %}">Give Me Suggestions</a>
-    </div>
+{% load static %}
+<nav class="main-nav">
+    <button class="hamburger" id="hamburger-button" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+    </button>
 
-    <div class="nav-links-right">
+    <div class="nav-links-container" id="nav-links-container">
+        <a href="{% url 'home' %}" class="nav-link-home {% if request.path == '/' or request.path == '/home/' %}active{% endif %}">Home</a>
+        <a href="{% url 'about' %}" class="nav-link-about {% if request.path == '/about/' %}active{% endif %}">About Me</a>
+        <a href="{% url 'add-student' %}" class="nav-link-info {% if request.path == '/add-student/' %}active{% endif %}">Give Me Your Info</a>
+        <a href="{% url 'home' %}#suggestions" class="nav-link-suggestions">Suggestions</a>
+        <a href="{% url 'home' %}#contact" class="nav-link-contact">Contact</a>
+        
         {% if user.is_authenticated %}
-            <a href="{% url 'materials' %}" class="{% if request.path == '/materials/' %}active{% endif %}">My Materials</a>
-            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+            <a href="{% url 'materials' %}" class="nav-link-auth {% if request.path == '/materials/' %}active{% endif %}">My Materials</a>
+            <form method="post" action="{% url 'logout' %}" class="logout-form nav-link-auth">
                 {% csrf_token %}
                 <button type="submit" class="logout-button">Log Out</button>
             </form>
         {% else %}
-            <a href="{% url 'login' %}" class="{% if request.path == '/login/' %}active{% endif %}">Log In</a>
-            <a href="{% url 'signup' %}" class="{% if request.path == '/signup/' %}active{% endif %}">Sign Up</a>
+            <a href="{% url 'login' %}" class="nav-link-auth {% if request.path == '/login/' %}active{% endif %}">Log In</a>
+            <a href="{% url 'signup' %}" class="nav-link-auth {% if request.path == '/signup/' %}active{% endif %}">Sign Up</a>
         {% endif %}
     </div>
-</div>
+</nav>

@@ -1,25 +1,17 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Materials</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
-<body>
 
-    {% include 'header.html' %}
-    {% include 'menu.html' %}
+{% block title %}My Materials{% endblock %}
 
+{% block content %}
     <div class="materials-page-container">
         
         <div class="upload-column">
-            <div class="upload-card">
+            <div class="glass-card">
                 <h3><i class="fas fa-cloud-upload-alt"></i> Upload New Material</h3>
                 <form method="post" enctype="multipart/form-data" class="upload-form">
                     {% csrf_token %}
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom: 1rem;">
                         <label for="title">File Title</label>
                         <input type="text" id="title" name="title" required>
                     </div>
@@ -27,13 +19,36 @@
                         <label for="file">Select File</label>
                         <input type="file" id="file" name="file" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Upload Now</button>
+                    <button type="submit" class="btn">Upload Now</button>
                 </form>
             </div>
         </div>
 
-        <div class="list-column">
+        <div class="list-column glass-card">
             <h3><i class="fas fa-list-ul"></i> Your Uploaded Files</h3>
+
+            <div class="list-controls">
+                <!-- Search Form -->
+                <form method="get" class="search-form">
+                    <div class="search-bar-wrapper">
+                        <input type="text" name="q" placeholder="Search by title..." value="{{ request.GET.q }}">
+                        <button type="submit" class="btn-search"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+                <!-- Sorting Form -->
+                <form method="get" class="sorting-form">
+                    {% if request.GET.q %}
+                        <input type="hidden" name="q" value="{{ request.GET.q }}">
+                    {% endif %}
+                    <label for="sort">Sort by:</label>
+                    <select name="sort" id="sort" onchange="this.form.submit()">
+                        <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>Newest First</option>
+                        <option value="oldest" {% if sort_by == 'oldest' %}selected{% endif %}>Oldest First</option>
+                        <option value="name_asc" {% if sort_by == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+                        <option value="name_desc" {% if sort_by == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                    </select>
+                </form>
+            </div>
 
             {% if messages %}
               {% for message in messages %}
@@ -42,8 +57,8 @@
             {% endif %}
 
             <div class="materials-grid">
-                {% for material in materials %}
-                <div class="material-card">
+                {% for material in page_obj %}
+                <div class="material-card" data-uploaded-at="{{ material.uploaded_at.isoformat }}">
                     <div class="file-icon">
                         {% if material.file.url|lower|slice:"-4:" == ".pdf" %}
                             <i class="fas fa-file-pdf"></i>
@@ -56,22 +71,64 @@
                         {% endif %}
                     </div>
                     <div class="file-details">
-                        <a href="{{ material.file.url }}" class="file-title" target="_blank">{{ material.title }}</a>
-                        <p class="file-info">{{ material.uploaded_at|date:"d M Y" }} &bull; {{ material.file.size|filesizeformat }}</p>
+                        <a href="{{ material.file.url }}" class="file-title" id="material-title-{{ material.id }}" target="_blank">{{ material.title }}</a>
+                        <p class="file-info">
+                            {{ material.uploaded_at|date:"d M Y" }} &bull; {{ material.file.size|filesizeformat }}
+                            <span class="countdown-timer"></span>
+                        </p>
                     </div>
                     <div class="file-actions">
+                        <button type="button" class="btn-edit edit-trigger" data-material-id="{{ material.id }}" data-current-title="{{ material.title }}" title="Edit title"><i class="fas fa-pencil-alt"></i></button>
                         <form method="post" action="{% url 'delete_material' material.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this file?');"><i class="fas fa-trash-alt"></i></button>
+                            <button type="button" class="btn-delete delete-trigger" title="Delete file"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </div>
                 </div>
                 {% empty %}
-                <p class="no-materials">You haven't uploaded any materials yet.</p>
+                    {% if request.GET.q %}
+                        <p class="no-materials">No materials found matching your search for "{{ request.GET.q }}".</p>
+                    {% else %}
+                        <p class="no-materials">You haven't uploaded any materials yet. Use the form on the left to get started!</p>
+                    {% endif %}
                 {% endfor %}
             </div>
+
+            <!-- Pagination Controls -->
+            {% if page_obj.has_other_pages %}
+            <div class="pagination">
+                <ul class="pagination-list">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">&laquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                    {% endif %}
+
+                    {% for i in page_obj.paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">&raquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">&raquo;</span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endif %}
+            <!-- End Pagination Controls -->
         </div>
     </div>
-
-</body>
-</html>
+{% endblock %}

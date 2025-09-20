@@ -1,54 +1,74 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {% include 'header.html' %}
-    <title>About Me</title>
-    {% load static %}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    {% include "menu.html" %}
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-    <div class="about-me-container">
-        <div class="about-me-card personal-info-card">
-            <h2 class="card-title">MY SELF JEEL SAKHARELIYA</h2>
-            <p>FROM ; Indus University</p>
-            <p>B.TECH, COMPUTER ENGINEERING PURSUING</p>
+{% block title %}About Me{% endblock %}
+
+{% block content %}
+<div class="about-page">
+    <section class="about-hero">
+        <h1 class="reveal" style="animation-delay: 0.2s;">About Me</h1>
+        <p class="reveal" style="animation-delay: 0.4s;">A passionate developer on a journey of creation and learning.</p>
+    </section>
+
+    <section id="about" class="about-details fade-in-section">
+        <div class="about-card glass-card">
+            <div class="about-card-icon"><i class="fas fa-user-graduate"></i></div>
+            <h3>Who I Am</h3>
+            <p>My name is <strong>Jeel Sakhareliya</strong>. I am currently pursuing a B.Tech in Computer Engineering at Indus University. I am driven by a passion for building elegant and functional software solutions.</p>
         </div>
 
-        <div class="about-me-card skills-card">
-            <h2 class="card-title">MY SKILLS</h2>
+        <div class="about-card glass-card">
+            <div class="about-card-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>My Skills</h3>
             <div class="skill-item">
                 <span class="skill-name">HTML</span>
                 <div class="skill-bar">
-                    <div class="skill-progress html"></div>
+                    <div class="skill-progress" style="width: 90%; background-color: #e44d26;"></div>
                 </div>
             </div>
             <div class="skill-item">
                 <span class="skill-name">CSS</span>
                 <div class="skill-bar">
-                    <div class="skill-progress css"></div>
+                    <div class="skill-progress" style="width: 85%; background-color: #264de4;"></div>
                 </div>
             </div>
             <div class="skill-item">
                 <span class="skill-name">C and C++</span>
                 <div class="skill-bar">
-                    <div class="skill-progress c-plus"></div>
+                    <div class="skill-progress" style="width: 75%; background-color: #5580a6;"></div>
                 </div>
             </div>
             <div class="skill-item">
                 <span class="skill-name">Django</span>
                 <div class="skill-bar">
-                    <div class="skill-progress django"></div>
+                    <div class="skill-progress" style="width: 95%; background-color: #0c4b33;"></div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
-</html>
+    </section>
+
+    <section class="about-gallery-section fade-in-section">
+        <h2 class="section-title">Achievements & Highlights</h2>
+        <div class="about-gallery">
+            <div class="gallery-card certificate-card">
+                <img src="{% static 'c1.jpeg' %}" alt="Certificate of Achievement">
+                <div class="card-overlay">
+                    <h4>Course Certificate</h4>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="{% static 't1.jpeg' %}" alt="Jeel Sakhareliya with a trophy">
+                 <div class="card-overlay">
+                    <h4>Competition Winner</h4>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="{% static 'c2.jpeg' %}" alt="Another Certificate">
+                 <div class="card-overlay">
+                    <h4>Workshop Certificate</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
