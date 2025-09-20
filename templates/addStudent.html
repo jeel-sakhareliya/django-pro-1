@@ -6,30 +6,38 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    {% include "menu.html" %}
+    {% include 'header.html' %}
+    {% include 'menu.html' %}
 
-    <div class="main-content">
-        <h2 class="form-title">ADD INFORMATION</h2>
-        <form method="post">
+    <div class="stylish-form-wrapper">
+        <h2>ADD INFORMATION</h2>
+        
+        <form method="post" class="student-form">
             {% csrf_token %}
-            <div class="form-group">
+
+            <div class="form-field-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
             </div>
-            <div class="form-group">
+
+            <div class="form-field-group">
                 <label for="mobile">Mobile:</label>
                 <input type="text" id="mobile" name="mobile" required>
             </div>
-            <div class="form-group">
+
+            <div class="form-field-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            <div class="form-group">
+
+            <div class="form-field-group">
                 <label for="address">Address:</label>
                 <input type="text" id="address" name="address" required>
             </div>
-            <button type="submit" class="submit-button">Save</button>
+
+            <button type="submit" class="form-submit-button">Save</button>
         </form>
     </div>
+
 </body>
 </html>

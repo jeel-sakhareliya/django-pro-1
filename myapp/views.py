@@ -84,17 +84,82 @@ def success_page(request):
 
 # myapp/views.py
 
-def add_student(request):
-    # ... your view code ...
-    pass
+def addStudent(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_student_success')
+    else:
+        form = StudentForm()
+    return render(request, 'addStudent.html', {'form': form})
 
 # myapp/views.py
 
 from django.shortcuts import render
 
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from .models import StudyMaterial
+from django.contrib import messages
 
+from .forms import CustomUserCreationForm
+def signup_view(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been created! Please log in.')
+            return redirect('login')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'signup.html', {'form': form})
 
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('materials')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
 
-        
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('home')
+
+@login_required
+def materials_view(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        file = request.FILES.get('file')
+        if title and file:
+            StudyMaterial.objects.create(user=request.user, title=title, file=file)
+            messages.success(request, 'File uploaded successfully!')
+            return redirect('materials')
+        else:
+            messages.error(request, 'Please provide both title and file.')
+
+    materials = StudyMaterial.objects.filter(user=request.user)
+    return render(request, 'materials.html', {'materials': materials})
+from django.shortcuts import get_object_or_404
+
+@login_required
+def delete_material_view(request, material_id):
+    material = get_object_or_404(StudyMaterial, id=material_id, user=request.user)
+    if request.method == 'POST':
+        material.file.delete(save=False)
+        material.delete()
+        messages.success(request, f'File "{material.title}" was deleted successfully.')
+    return redirect('materials')
+
+def add_student_success(request):
+    return render(request, 'add_student_success.html')
+
         
         

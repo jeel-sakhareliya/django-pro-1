@@ -71,18 +71,27 @@ body {
     from, to { border-color: transparent }
     50% { border-color: white; }
 }
+
 .navigation-bar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* This separates the left and right links */
     align-items: center;
     background-color: #34495e;
-    padding: 15px 0;
+    padding: 15px 30px; /* Adjusted padding for better spacing */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     margin: 20px auto;
     max-width: 90%;
+    box-sizing: border-box;
 }
 
+/* These are the new containers for your link groups */
+.nav-links-left, .nav-links-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Your existing styles for the links are perfect */
 .navigation-bar a {
     color: #fff;
     text-decoration: none;
@@ -96,6 +105,28 @@ body {
 }
 
 .navigation-bar a:hover {
+    background-color: #3498db;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* New style to make the logout button look like a regular link */
+.logout-button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    font-family: inherit;
+    padding: 12px 25px;
+    margin: 0 10px;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.logout-button:hover {
     background-color: #3498db;
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
@@ -408,4 +439,483 @@ textarea:focus {
     color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.auth-form-wrapper {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.form-title {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 2em;
+}
+
+.auth-form-wrapper form p {
+    text-align: left;
+    color: #666;
+    margin: 10px 0;
+}
+
+.auth-form-wrapper input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.auth-form-wrapper input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.auth-switch {
+    margin-top: 20px;
+    color: #555;
+}
+
+.auth-switch a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Materials Page Styling */
+.materials-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.upload-wrapper, .materials-list {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+}
+
+.upload-wrapper h2, .materials-list h2 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.upload-wrapper input[type="text"], .upload-wrapper input[type="file"] {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.material-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.material-item:last-child {
+    border-bottom: none;
+}
+
+.material-item:hover {
+    background-color: #f9f9f9;
+}
+
+.material-item a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.material-item span {
+    color: #777;
+    font-size: 0.9em;
+}
+
+.message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    color: #fff;
+}
+.message.success { background-color: #28a745; }
+.message.error { background-color: #dc3545; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Adds a gradient background to the body for the blur effect to work on */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-attachment: fixed;
+    /* Keep your other body styles like font-family, etc. */
+}
+
+/* This is the style for your "special text box" */
+.auth-form-wrapper {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 30px 40px;
+}
+
+/* New style for the form title */
+.form-title {
+    color: #333;
+    font-weight: 600;
+}
+
+/* This styles Django's default form labels and inputs */
+.auth-form-wrapper form p {
+    margin: 15px 0;
+    text-align: left;
+}
+
+.auth-form-wrapper label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 500;
+}
+
+.auth-form-wrapper input {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(209, 213, 219, 0.5);
+    color: #333;
+}
+
+/* Styles the help text (e.g., "Required. 150 characters or fewer.") */
+.helptext {
+    font-size: 0.8em;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Styles the password validation list */
+.helptext ul {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    color: #555;
+}
+
+.helptext ul li {
+    margin-bottom: 3px;
+    font-size: 0.9em;
+}
+/* New Materials Page Layout */
+.materials-page-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.upload-column {
+    flex: 1;
+    min-width: 300px;
+}
+
+.list-column {
+    flex: 2;
+    min-width: 300px;
+}
+
+.upload-card, .list-column {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.upload-column h3, .list-column h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.5em;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.upload-column h3 i, .list-column h3 i {
+    color: #007bff;
+    margin-right: 10px;
+}
+
+/* New Form Styles */
+.upload-form .form-group {
+    margin-bottom: 20px;
+}
+
+.upload-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+.upload-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* New Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-image: linear-gradient(to right, #007bff, #0056b3);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+/* New Material Card Styles */
+.materials-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.material-card {
+    display: flex;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.material-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-color: #007bff;
+}
+
+.file-icon {
+    font-size: 2em;
+    color: #007bff;
+    margin-right: 20px;
+}
+.fa-file-pdf { color: #e74c3c; }
+.fa-file-word { color: #2980b9; }
+.fa-file-image { color: #2ecc71; }
+
+.file-details {
+    flex-grow: 1;
+}
+
+.file-title {
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.file-info {
+    font-size: 0.9em;
+    color: #777;
+    margin: 5px 0 0 0;
+}
+
+.btn-delete {
+    background: transparent;
+    border: none;
+    color: #e74c3c;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+    color: #c0392b;
+    transform: scale(1.2);
+}
+
+.no-materials {
+    color: #777;
+    padding: 20px 0;
+}
+
+.forgot-password-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #555;
+    font-size: 0.9em;
+}
+.success-container {
+    text-align: center;
+    padding: 60px 30px;
+    margin: 50px auto;
+    max-width: 700px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    animation: fadeIn 1s ease-in-out;
+}
+
+.success-container h1 {
+    color: #27ae60;
+    margin-bottom: 15px;
+}
+
+.success-container p {
+    color: #555;
+    font-size: 1.1em;
+}
+
+/* --- New Special Style for the Add Information Form --- */
+
+.stylish-form-wrapper {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    animation: slideUpFadeIn 1s ease-out forwards;
+}
+
+.stylish-form-wrapper h2 { /* Targeting the 'ADD INFORMATION' title */
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: 600;
+    color: #3498db;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stylish-form-wrapper .student-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.stylish-form-wrapper .form-field-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+.stylish-form-wrapper .form-field-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    color: #333;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.stylish-form-wrapper .form-field-group input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
+
+.stylish-form-wrapper .form-submit-button {
+    grid-column: 1 / -1;
+    padding: 15px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(45deg, #2980b9, #8e44ad);
+    transition: all 0.4s ease;
+}
+
+.stylish-form-wrapper .form-submit-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Keyframe for the entry animation */
+@keyframes slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

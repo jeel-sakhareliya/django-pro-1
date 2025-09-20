@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Information Received</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    {% include 'header.html' %}
+    {% include 'menu.html' %}
+
+    <div class="success-container">
+        <h1>Thanks for providing your information!</h1>
+        <p>We have received your submission and appreciate your time.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary" style="text-decoration: none; margin-top: 20px;">Return to Home</a>
+    </div>
+
+</body>
+</html>
