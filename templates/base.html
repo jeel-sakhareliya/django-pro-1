@@ -108,6 +108,16 @@
             speed: 1.50,
             zoom: 0.80
         });
+
+        // --- Study Material Accordion ---
+        document.querySelectorAll('.subject-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const card = header.closest('.subject-card');
+                if (card) {
+                    card.classList.toggle('expanded');
+                }
+            });
+        });
     });
 
     // Signup success confetti

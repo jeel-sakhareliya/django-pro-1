@@ -20,4 +20,6 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('materials/', views.materials_view, name='materials'),
     path('materials/delete/<int:material_id>/', views.delete_material_view, name='delete_material'),
+    path('public-materials/', views.public_materials_view, name='public_materials'),
+    path('view/<str:subject_code>/<str:unit_code>/', views.view_material, name='view_material'),
 ]

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -91,6 +91,85 @@ def add_question(request):
 
 def success_page(request):
     return render(request, 'success.html')
+
+# --- Study Material Views ---
+
+# Data for the new Study Material page. You can update the '#' with your Google Drive links.
+STUDY_MATERIALS_DATA = {
+    "ce0316": {
+        "name": "Object Oriented Concepts with UML (OOCp)",
+        "icon": "fas fa-project-diagram",
+        "units": {
+            "unit1": {"parts": ["UNIT-I: Introduction to C++"], "url": "https://drive.google.com/drive/folders/18eMti3I6_SuVvS5qakQrcirgbcRo_7W8"},
+            "unit2": {"parts": ["UNIT-II: Objects and classes"], "url": "https://drive.google.com/drive/folders/18qnXMYmFtqAQxxQk5Z0VFQnNQqgzQTPZ"},
+            "unit3": {"parts": ["UNIT-III: Inheritance"], "url": "https://drive.google.com/drive/folders/18syyX6kgnl6PMbDa42UVVdkNkyEoE-ad"},
+            "unit4": {"parts": ["UNIT-IV: File management, Object Oriented Design"], "url": "https://drive.google.com/drive/folders/1ZHs0o4nuXiXxIALRjpxT3-qZeYzkUNWi"},
+        }
+    },
+    "ce0317": {
+        "name": "Database Management System (DBMS)",
+        "icon": "fas fa-database",
+        "units": {
+            "unit1": {"parts": ["UNIT-I: Introductory concepts of DBMS"], "url": "https://drive.google.com/drive/folders/1CMjQRBqsW6AhAW2c4DqdE374rj6rTvj2"},
+            "unit2": {"parts": ["UNIT-II: Entity-Relationship model, Relational Model", "Relation Database Design"], "url": "https://drive.google.com/drive/folders/1CZhqKylDv_RAwdTQufHIDaKR-nstblnV"},
+            "unit3": {"parts": ["UNIT-III: Transaction Management and Security"], "url": "https://drive.google.com/drive/folders/1ZtS4WOOBR8tpoWLnNUZVZtd9xfY6ASVS"},
+            "unit4": {"parts": ["UNIT-IV: SQL & PL/SQL Concepts"], "url": "https://drive.google.com/drive/folders/1KYVzH3OE448iAXubHlG5fZFQrzTZAY3G"},
+        }
+    },
+    "ec0315": {
+        "name": "Digital Electronics",
+        "icon": "fas fa-microchip",
+        "units": {
+            "unit1": {"parts": ["UNIT-I: Number Systems"], "url": "https://drive.google.com/drive/folders/1B9n-lV5NQxy_hn4ucSyFec-AsXFCNtPv"},
+            "unit2": {"parts": ["UNIT-II: Binary Codes, Logic Gates", "Boolean Algebra"], "url": "https://drive.google.com/drive/folders/1BQ14csl_RydakxossjmfcEzqD9RS5Wpn"},
+            "unit3": {"parts": ["UNIT-III: Combinational circuits with MSI & LSI, Flip flop"], "url": "https://drive.google.com/drive/folders/1LH3WK6MVlC6qh3H9aBrMmmAG4UB9mt7_"},
+            "unit4": {"parts": ["UNIT-IV: Shift Registers, Counters", "FSM Design"], "url": "https://drive.google.com/drive/folders/181URc0NrKaLrRSloYAUEBO04CBXLjfvU"},
+        }
+    },
+    "math": {
+        "name": "B. Tech. (Mathematics)",
+        "icon": "fas fa-calculator",
+        "units": {
+            "unit1": {"parts": ["UNIT-I: Basics of Probability, Probability distributions"], "url": "https://drive.google.com/drive/folders/19-vJ9Jh3hddT4kc47j3lYAezHEsTaBVy"},
+            "unit2": {"parts": ["UNIT-II: Statistics"], "url": "https://drive.google.com/drive/folders/19BA3xWRoozmdGdOC3gXowNLAQjjAycCE"},
+            "unit3": {"parts": ["UNIT-III: Introduction, Interpolation"], "url": "https://drive.google.com/drive/folders/19Gf6BAOeTuPnsW2iQBKjiNF6on3006ZF"},
+            "unit4": {"parts": ["UNIT-IV: Numerical Methods"], "url": "https://drive.google.com/drive/folders/19XL5YZS9mb0K4u6MnXcPkpW7tuoAGFAY"},
+        }
+    }
+}
+
+def study_material_page(request):
+    return render(request, 'study_material.html', {'subjects': STUDY_MATERIALS_DATA})
+
+def view_material(request, subject_code, unit_code):
+    try:
+        # Look up the URL from the data dictionary
+        url = STUDY_MATERIALS_DATA[subject_code]['units'][unit_code]['url']
+        
+        # Check if the URL is still a placeholder
+        if url == "#":
+            messages.info(request, "This material is not yet available. Please check back later.")
+            return redirect('public_materials')
+        
+        # Redirect the user to the Google Drive link
+        return redirect(url)
+    except KeyError:
+        # If the subject or unit code is invalid, raise a 404 error
+        raise Http404("The requested study material could not be found.")
+
+def public_materials_view(request):
+    query = request.GET.get('q', '')
+    
+    subjects_data = STUDY_MATERIALS_DATA
+    
+    if query:
+        subjects_data = {
+            code: subject for code, subject in STUDY_MATERIALS_DATA.items()
+            if query.lower() in subject['name'].lower()
+        }
+        
+    context = {'subjects': subjects_data}
+    return render(request, 'study_material.html', context)
 
 # --- Authentication Views ---
 def signup_view(request):

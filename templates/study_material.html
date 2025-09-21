@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Study Material{% endblock %}
+
+{% block content %}
+<div class="study-material-container">
+    <div class="study-material-header">
+        <h1>Semester 3 Study Material</h1>
+    </div>
+
+    <div class="syllabus-box">
+        <a href="https://drive.google.com/file/d/10tXKfsWQt2C-6qaF_mP8ZWQB6TZ4DnJu/view?usp=drivesdk" target="_blank" class="syllabus-card">
+            <i class="fas fa-book-open"></i>
+            <span>All Subjects Syllabus — Semester 3</span>
+        </a>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="study-material-controls">
+        <form method="get" class="search-form">
+            <div class="search-bar-wrapper">
+                <input type="text" name="q" placeholder="Search subjects by name..." value="{{ request.GET.q }}">
+                <button type="submit" class="btn-search"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message {{ message.tags }}" style="max-width: 800px; margin-left: auto; margin-right: auto;">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="subject-grid">
+        {% for code, subject in subjects.items %}
+        <div class="subject-card glass-card">
+            <div class="subject-header">
+                <h3><i class="{{ subject.icon }}"></i> {{ subject.name }}</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <ul class="unit-list">
+                {% for unit_code, unit in subject.units.items %}
+                <li class="unit-item">
+                    <a href="{% url 'view_material' subject_code=code unit_code=unit_code %}" target="_blank">
+                        <div class="unit-name-wrapper">
+                            {% for part in unit.parts %}
+                                <span class="unit-part">{{ part }}</span>
+                            {% endfor %}
+                        </div>
+                        <i class="fas fa-external-link-alt unit-icon"></i>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% empty %}
+        <div class="no-results-card glass-card">
+            <p>No subjects found matching your search for "<strong>{{ request.GET.q }}</strong>".</p>
+            <a href="{% url 'public_materials' %}" class="btn btn-secondary" style="margin-top: 1rem;">Clear Search</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

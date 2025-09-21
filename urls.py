@@ -8,6 +8,11 @@ urlpatterns = [
     path('about/', views.aboutpage, name='about'), # /about/
     path('contact/', views.contactpage, name='contact'), # /contact/
 
+    # New Study Material URLs
+    path('study-material/', views.study_material_page, name='study_material'),
+    path('study-material/view/<str:subject_code>/<str:unit_code>/', views.view_material, name='view_material'),
+    path('public-materials/', views.public_materials_view, name='public_materials'),
+
     # Auth URLs
     path('signup/', views.signup_view, name='signup'), # /signup/
     # login and logout are now handled by django.contrib.auth.urls, but we keep this for the view logic

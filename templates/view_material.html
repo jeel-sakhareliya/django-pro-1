@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Material</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md text-center">
+        <h1 class="text-2xl font-bold mb-4">Viewing Study Material</h1>
+        <p class="text-lg">Subject Code: <span class="font-mono bg-gray-200 px-2 py-1 rounded">{{ subject_code }}</span></p>
+        <p class="text-lg mt-2">Unit Code: <span class="font-mono bg-gray-200 px-2 py-1 rounded">{{ unit_code }}</span></p>
+        <div class="mt-6">
+            <a href="javascript:history.back()" class="text-indigo-600 hover:underline">Go Back</a>
+        </div>
+    </div>
+</body>
+</html>
